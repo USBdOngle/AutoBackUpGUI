@@ -36,9 +36,33 @@
     <ClCompile Include="AutoBackUpGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fileCopyHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fileToCopyDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dataBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoBackUpGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fileCopyHandler.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fileToCopyDetector.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="dataBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="testClass.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
