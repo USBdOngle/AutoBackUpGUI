@@ -2,6 +2,8 @@
 #include <QtWidgets>
 #include <QtWidgets/QMainWindow>
 #include "ui_AutoBackUpGUI.h"
+#include "watchedDirsGUI.h"
+#include "buttonGUI.h"
 
 class AutoBackUpGUI : public QMainWindow
 {
@@ -13,12 +15,10 @@ public:
 private:
 	Ui::AutoBackUpGUIClass ui;
 
-	QLabel *watchedTitleLabel; //widget that titles watchedLabel section
-	QLabel *watchedLabel; //widget to display directories currently being watched
-	QScrollArea *watchedScroll; //adds scroll functionality to widget displaying directories
+	watchedDirsGUI *watchedDirs;
 
-	QPushButton *addButton; //button widget to add new directories to watch
-	QPushButton *removeButton; //button widget to remove directories from being watched
+	buttonGUI *addButton; //button widget to add new directories to watch
+	buttonGUI *removeButton; //button widget to remove directories from being watched
 
 	QFont *fontScroll = new QFont("Arial", 12); //font for items in scroll area
 	QFont *fontButton = new QFont("Arial", 13, QFont::Bold); //font for buttons
@@ -29,6 +29,4 @@ private:
 	const int watchedH = 200; //Height of watchedLabel
 	const int watchedW = 200; //width of watchedLabel
 
-	void setupWatchedDirs(); //sets up and configures watchedLabel & watchedScroll & watchedTitleLabel
-	void setupWatchedDirsButtons(); //sets up and configures addButton & removeButton
 };

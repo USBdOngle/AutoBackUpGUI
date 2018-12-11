@@ -4,37 +4,13 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	ui.setupUi(this);
 	this->setFixedSize(480, 300);
 	this->setWindowTitle("AutoBackUp");
+	
+	watchedDirs = new watchedDirsGUI(this, watchedX, watchedY, watchedW, watchedH, *fontScroll, *fontTitle);
+	addButton = new buttonGUI(this, watchedX, watchedY + 200, watchedW / 2, 30, "Add", *fontButton);
+	removeButton = new buttonGUI(this, watchedX + watchedH / 2, watchedY + 200, watchedW / 2, 30, "Remove", *fontButton);
 
-	setupWatchedDirs();
-	setupWatchedDirsButtons();
 }
-
-void
-AutoBackUpGUI::setupWatchedDirs() {
-	watchedTitleLabel = new QLabel(this);
-	watchedTitleLabel->move(watchedX+5, watchedY-30);
-	watchedTitleLabel->resize(watchedW, 30);
-	watchedTitleLabel->setText("Watched Directories");
-	watchedTitleLabel->setFont(*fontTitle);
-
-	
-	watchedLabel = new QLabel(this);
-	watchedScroll = new QScrollArea(this);
-
-	watchedLabel->move(watchedX, watchedY);
-	watchedScroll->move(watchedX, watchedY);
-	
-	watchedLabel->resize(watchedW, watchedH);
-	watchedScroll->resize(watchedW, watchedH);
-	
-	watchedLabel->setText("test \n test \n test");
-	watchedLabel->setFont(*fontScroll);
-	
-	
-	watchedScroll->setWidget(watchedLabel);
-}
-
-void
+/*void
 AutoBackUpGUI::setupWatchedDirsButtons() {
 	int h = 30;
 	
@@ -51,5 +27,4 @@ AutoBackUpGUI::setupWatchedDirsButtons() {
 	addButton->setFont(*fontButton);
 	removeButton->setText("Remove");
 	removeButton->setFont(*fontButton);
-	
-}
+}*/

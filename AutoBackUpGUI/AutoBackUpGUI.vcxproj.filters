@@ -48,6 +48,12 @@
     <ClCompile Include="testClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="watchedDirsGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoBackUpGUI.h">
@@ -65,9 +71,21 @@
     <QtMoc Include="testClass.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="watchedDirsGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="buttonGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AutoBackUpGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="watchedDirsGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="buttonGUI.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
