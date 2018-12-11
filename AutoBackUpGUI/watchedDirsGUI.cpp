@@ -4,8 +4,10 @@ watchedDirsGUI::watchedDirsGUI(QWidget *parent, const int x, const int y, const 
 	ui.setupUi(this);
 	
 	move(x, y);
-	resize(w, h);
+	setMinimumSize(w, h);
 	setFont(fontScroll);
+	setAlignment(Qt::AlignTop | Qt::AlignLeft);
+	setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 
 	scroll = new QScrollArea(parent);
 	scroll->move(x, y);
@@ -19,6 +21,12 @@ watchedDirsGUI::watchedDirsGUI(QWidget *parent, const int x, const int y, const 
 	title->setFont(fontTitle);
 }
 
-watchedDirsGUI::~watchedDirsGUI()
-{
+watchedDirsGUI::~watchedDirsGUI() {}
+
+void
+watchedDirsGUI::slotInitDirs(const QStringList &dirs) {
+	for (QString s : dirs) {
+		watchedDirs.append(s + '\n');
+	}
+	setText(watchedDirs);
 }

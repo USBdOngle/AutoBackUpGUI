@@ -139,7 +139,7 @@ dataBase::emitData() {
 		db.close();
 
 		emit dirsLoadedFromDB(pathList); // emit list of paths loaded from database
-		emit destLoadedFromDB(dest);
+		//emit destLoadedFromDB(dest);
 	}
 	else {
 		ERROR(db);

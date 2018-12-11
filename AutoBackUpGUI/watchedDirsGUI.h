@@ -15,5 +15,10 @@ private:
 	Ui::watchedDirsGUI ui;
 
 	QLabel *title;
-	QScrollArea *scroll;
+	QScrollArea *scroll; //adds scrolling capability
+
+	QString watchedDirs; //contains dirs that we can scroll through
+
+public slots:
+	void slotInitDirs(const QStringList &dirs); //receives list of dirs being watched and converts them to a single string then displays them
 };

@@ -38,10 +38,13 @@ int main(int argc, char *argv[])
 	QObject::connect(copyTest, SIGNAL(testDestination(const QString)), dbTest, SLOT(slotAddNewDestToDB(const QString)));
 	QObject::connect(dbTest, SIGNAL(destLoadedFromDB(const QString)), copyTest, SLOT(slotNewDestDir(const QString)));
 	//copyTest->testemit();
-	//dbTest->emitData();
+	
 
 	AutoBackUpGUI w;
+	w.setupConnections(dbTest);
 	w.show();
+
+	dbTest->emitData();
 
 	return a.exec();
 }

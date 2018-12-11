@@ -54,6 +54,9 @@
     <ClCompile Include="buttonGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileExplorerGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoBackUpGUI.h">
@@ -77,6 +80,9 @@
     <QtMoc Include="buttonGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="FileExplorerGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AutoBackUpGUI.ui">
@@ -86,6 +92,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="buttonGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="FileExplorerGUI.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
