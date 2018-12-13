@@ -48,13 +48,13 @@
     <ClCompile Include="testClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="watchedDirsGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="buttonGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileExplorerGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="watchedDirsListGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,6 +83,9 @@
     <QtMoc Include="FileExplorerGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="watchedDirsListGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AutoBackUpGUI.ui">
@@ -95,6 +98,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="FileExplorerGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="watchedDirsListGUI.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

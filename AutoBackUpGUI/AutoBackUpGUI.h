@@ -3,7 +3,7 @@
 #include <QtWidgets>
 #include <QtWidgets/QMainWindow>
 #include "ui_AutoBackUpGUI.h"
-#include "watchedDirsGUI.h"
+#include "watchedDirsListGUI.h"
 #include "buttonGUI.h"
 #include "dataBase.h"
 
@@ -19,7 +19,7 @@ public:
 private:
 	Ui::AutoBackUpGUIClass ui;
 
-	watchedDirsGUI *watchedDirs;
+	watchedDirsListGUI *watchedDirs;
 	buttonGUI *addButton; //button widget to add new directories to watch
 	buttonGUI *removeButton; //button widget to remove directories from being watched
 

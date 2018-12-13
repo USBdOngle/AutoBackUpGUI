@@ -121,7 +121,7 @@
     <ClCompile Include="fileToCopyDetector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="testClass.cpp" />
-    <ClCompile Include="watchedDirsGUI.cpp" />
+    <ClCompile Include="watchedDirsListGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoBackUpGUI.h" />
@@ -131,6 +131,7 @@
     <QtUic Include="buttonGUI.ui" />
     <QtUic Include="FileExplorerGUI.ui" />
     <QtUic Include="watchedDirsGUI.ui" />
+    <QtUic Include="watchedDirsListGUI.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="AutoBackUpGUI.qrc" />
@@ -185,6 +186,14 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="FileExplorerGUI.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_SQL_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_SQL_LIB</Define>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="watchedDirsListGUI.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSql</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_SQL_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSql</IncludePath>

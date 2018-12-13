@@ -5,7 +5,7 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	this->setFixedSize(480, 300);
 	this->setWindowTitle("AutoBackUp");
 	
-	watchedDirs = new watchedDirsGUI(this, watchedX, watchedY, watchedW, watchedH, *fontScroll, *fontTitle);
+	watchedDirs = new watchedDirsListGUI(this, watchedX, watchedY, watchedW, watchedH, *fontScroll, *fontTitle);
 	addButton = new buttonGUI(this, watchedX, watchedY + 200, watchedW / 2, 30, "Add", *fontButton);
 	removeButton = new buttonGUI(this, watchedX + watchedH / 2, watchedY + 200, watchedW / 2, 30, "Remove", *fontButton);
 }
