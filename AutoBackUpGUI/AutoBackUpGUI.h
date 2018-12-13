@@ -6,6 +6,7 @@
 #include "watchedDirsListGUI.h"
 #include "buttonGUI.h"
 #include "dataBase.h"
+#include "fileSystemWindowGUI.h"
 
 class AutoBackUpGUI : public QMainWindow
 {
@@ -13,6 +14,7 @@ class AutoBackUpGUI : public QMainWindow
 
 public:
 	AutoBackUpGUI(QWidget *parent = Q_NULLPTR);
+	~AutoBackUpGUI();
 
 	void setupConnections(dataBase *db);
 
@@ -27,6 +29,8 @@ private:
 	const int watchedY = 50; //y-pos for watchedLabel
 	const int watchedH = 200; //Height of watchedLabel
 	const int watchedW = 200; //width of watchedLabel
+
+	fileSystemWindowGUI *fileSystemWindow;
 
 	QFont *fontScroll = new QFont("Arial", 10); //font for items in scroll area
 	QFont *fontButton = new QFont("Arial", 13, QFont::Bold); //font for buttons

@@ -51,10 +51,13 @@
     <ClCompile Include="buttonGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileExplorerGUI.cpp">
+    <ClCompile Include="watchedDirsListGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="watchedDirsListGUI.cpp">
+    <ClCompile Include="fileSystemWindowGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="confirmationBoxGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,10 +80,13 @@
     <QtMoc Include="buttonGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="FileExplorerGUI.h">
+    <QtMoc Include="watchedDirsListGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="watchedDirsListGUI.h">
+    <QtMoc Include="fileSystemWindowGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="confirmationBoxGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -98,6 +104,15 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="watchedDirsListGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="fileSystemGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="fileSystemWindowGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="confirmationBoxGUI.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
