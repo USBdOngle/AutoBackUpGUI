@@ -13,6 +13,10 @@ watchedDirsListGUI::watchedDirsListGUI(QWidget *parent, const int x, const int y
 	title->setFont(fontTitle);
 }
 
-watchedDirsListGUI::~watchedDirsListGUI()
-{
+watchedDirsListGUI::~watchedDirsListGUI() {}
+
+void
+watchedDirsListGUI::slotInitDirs(const QStringList &dirs) {
+	addItems(dirs);
 }
+

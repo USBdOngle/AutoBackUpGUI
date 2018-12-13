@@ -74,9 +74,6 @@
     <QtMoc Include="testClass.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="watchedDirsGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="buttonGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
