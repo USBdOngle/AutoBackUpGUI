@@ -57,7 +57,7 @@
     <ClCompile Include="fileSystemWindowGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="confirmationBoxGUI.cpp">
+    <ClCompile Include="confirmDirMessageGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +86,7 @@
     <QtMoc Include="fileSystemWindowGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="confirmationBoxGUI.h">
+    <QtMoc Include="confirmDirMessageGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -113,6 +113,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="confirmationBoxGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="confirmDirMessageGUI.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

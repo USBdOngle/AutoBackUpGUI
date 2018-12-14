@@ -1,9 +1,10 @@
 #include "fileSystemWindowGUI.h"
 
-fileSystemWindowGUI::fileSystemWindowGUI(QWidget *parent) : QDialog(parent)
-{
+fileSystemWindowGUI::fileSystemWindowGUI(QWidget *parent) : QDialog(parent){
 	ui.setupUi(this);
-	this->setFixedSize(w, h);
+	
+	setFixedSize(w, h);
+	setWindowTitle("File Explorer");
 	
 	dirModel = new QFileSystemModel(this);
 	dirModel->setRootPath(QDir::homePath());
@@ -14,19 +15,32 @@ fileSystemWindowGUI::fileSystemWindowGUI(QWidget *parent) : QDialog(parent)
 	view->header()->hideSection(3); //hides date modified column
 	view->header()->hideSection(1); //hides size column
 	view->setColumnWidth(0, 240);
+
+	QObject::connect(view, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(slotGetDoubleClick(const QModelIndex))); 
 }
 
-fileSystemWindowGUI::~fileSystemWindowGUI() {
+fileSystemWindowGUI::~fileSystemWindowGUI(){
 	delete dirModel;
 	delete view;
 }
 
 void
-fileSystemWindowGUI::openWindowSlot() {
+fileSystemWindowGUI::slotOpenWindow() {
 	show();
 }
 
-void 
-fileSystemWindowGUI::getFileAtIndexSlot(const QModelIndex &index) {
+void
+fileSystemWindowGUI::slotGetDoubleClick(const QModelIndex &index) {
+	//check to see if path at index is a directory otherwise we don't want user to select a file
+	QString possibleDir = dirModel->filePath(index);
+	QDir dirCheck(possibleDir);
+	if (dirCheck.exists()){
+		clickedDir = possibleDir;
+		emit openConfirmMessage();
+	}
+}
 
+void
+fileSystemWindowGUI::slotGetConfirmMessageResult() {
+	emit newDirToWatch(clickedDir);
 }

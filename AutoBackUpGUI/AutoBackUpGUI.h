@@ -7,6 +7,8 @@
 #include "buttonGUI.h"
 #include "dataBase.h"
 #include "fileSystemWindowGUI.h"
+#include "confirmDirMessageGUI.h"
+#include "fileToCopyDetector.h"
 
 class AutoBackUpGUI : public QMainWindow
 {
@@ -16,7 +18,7 @@ public:
 	AutoBackUpGUI(QWidget *parent = Q_NULLPTR);
 	~AutoBackUpGUI();
 
-	void setupConnections(dataBase *db);
+	void setupExternalConnections(dataBase *db, fileToCopyDetector *detector);
 
 private:
 	Ui::AutoBackUpGUIClass ui;
@@ -31,6 +33,7 @@ private:
 	const int watchedW = 200; //width of watchedLabel
 
 	fileSystemWindowGUI *fileSystemWindow;
+	confirmDirMessageGUI *confirmDirMessage;
 
 	QFont *fontScroll = new QFont("Arial", 10); //font for items in scroll area
 	QFont *fontButton = new QFont("Arial", 13, QFont::Bold); //font for buttons

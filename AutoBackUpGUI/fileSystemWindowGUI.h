@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QDir>
 #include <QtWidgets>
 #include <QDialog>
 #include "ui_fileSystemWindowGUI.h"
@@ -14,18 +15,23 @@ public:
 
 private:
 	Ui::fileSystemWindowGUI ui;
+	
 	const int w = 440;
 	const int h = 260;
 	
 	QFileSystemModel *dirModel;
 	QTreeView *view;
 
+	QString clickedDir;
+
 public slots:
-	void openWindowSlot(); //accepts signal from QPushButton to open window
+	void slotOpenWindow(); //accepts signal from QPushButton to open window
+	void slotGetConfirmMessageResult(); //accepts signal from confirmDirMessageGUI only when user selectse 'Ok' - then will emit directory path
 
 private slots:
-	void getFileAtIndexSlot(const QModelIndex &index); //gets the path to directory at index and emits it
+	void slotGetDoubleClick(const QModelIndex &index); //connects to doubleClicked signal from view so we can emit it externally and save directory that was clicked
 
 signals:
-	void pathToWatch(const QString &path);
+	void newDirToWatch(const QString &path);
+	void openConfirmMessage();
 };

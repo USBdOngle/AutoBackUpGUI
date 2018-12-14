@@ -24,3 +24,7 @@ watchedDirsListGUI::slotInitDirs(const QStringList &dirs) {
 	addItems(dirs);
 }
 
+void
+watchedDirsListGUI::slotAddNewDir(const QString &dir) {	
+	addItem(dir);
+}

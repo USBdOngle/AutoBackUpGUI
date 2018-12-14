@@ -18,4 +18,5 @@ private:
 
 public slots:
 	void slotInitDirs(const QStringList &dirs); //receives list of dirs being watched and converts them to a single string then displays them
+	void slotAddNewDir(const QString &dir); //receives a signal dir to add to list being displayed
 };

@@ -1,0 +1,23 @@
+<UI version="4.0" >
+ <class>confirmDirMessageGUI</class>
+ <widget class="QMessageBox" name="confirmDirMessageGUI" >
+  <property name="objectName" >
+   <string notr="true">confirmDirMessageGUI</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+	<x>0</x>
+	<y>0</y>
+	<width>400</width>
+	<height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>confirmDirMessageGUI</string>
+  </property>
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</UI>

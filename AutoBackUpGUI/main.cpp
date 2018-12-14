@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
 
 
-	fileToCopyDetector* detectTest = new fileToCopyDetector(paths, &a);
+	fileToCopyDetector* detectTest = new fileToCopyDetector(&a);
 	dataBase* dbTest = new dataBase(&a);
 	fileCopyHandler* copyTest = new fileCopyHandler(dest, &a);
 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	
 
 	AutoBackUpGUI w;
-	w.setupConnections(dbTest);
+	w.setupExternalConnections(dbTest, detectTest);
 	w.show();
 
 	dbTest->emitData();
