@@ -20,11 +20,19 @@ watchedDirsListGUI::~watchedDirsListGUI() {
 }
 
 void
-watchedDirsListGUI::slotInitDirs(const QStringList &dirs) {
+watchedDirsListGUI::slotAddNewDir(const QStringList &dirs) {
 	addItems(dirs);
 }
 
 void
 watchedDirsListGUI::slotAddNewDir(const QString &dir) {	
 	addItem(dir);
+}
+
+void
+watchedDirsListGUI::slotRemoveCurrentDir() {
+	QListWidgetItem* dirItem = currentItem(); //get currently selected item from displayed list of watched dirs
+	QString dirString = dirItem->text();
+	delete dirItem; //this removes the widget from the QListWidget
+	emit currentDirRemoved(dirString); //emit the direcotry that was removed so rest of program can handle changes
 }

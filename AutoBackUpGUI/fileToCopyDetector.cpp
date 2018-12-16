@@ -96,3 +96,8 @@ fileToCopyDetector::slotWatchNewDir(const QStringList &paths) {
 		addPathToWatch(path);
 	}
 }
+
+void
+fileToCopyDetector::slotStopWatchingDir(const QString &dirPath) {
+	removePath(dirPath);
+}
