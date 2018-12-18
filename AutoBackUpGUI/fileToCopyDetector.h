@@ -16,10 +16,11 @@ public:
 	fileToCopyDetector(const QStringList &paths, QObject *parent); //constructor that accepts a list of directories to watch - used for testing
 	~fileToCopyDetector();
 
-	bool addPathToWatch(const QString &path); //add a path to directory to watch
+	bool addPathToWatch(const QString &path); //add a path to directory to watch, used for testing
 
 private:
 	QMultiMap<QString, QString> dirsAndFilesMap; //contains an index of files already contained in destination directories
+	bool isDestinationSet = false; //keeps track whether there is currently a set destination, if not nothing will happen
 
 	void removeFiles(QStringList &files, const QString &path); //handles the case when a file is removed from a directory being watched
 
@@ -27,6 +28,7 @@ public slots:
 	void slotWatchNewDir(const QString &dirPath); //receives signal that a new directory needs to be watched
 	void slotWatchNewDir(const QStringList &paths); //receives signal of multiple directories to be watched, overloads preceding function
 	void slotStopWatchingDir(const QString &dirPath); //receives signal that we no longer need to watch a certain directory
+	void slotDestinationSet(const QString &destPath); //receives signal of a new destination and determines if it is valid so fileToCopyDetector can begin working
 
 private slots:
 	void slotDirChanged(const QString &path); //internal slot that recieves signal that a watched directory was modified

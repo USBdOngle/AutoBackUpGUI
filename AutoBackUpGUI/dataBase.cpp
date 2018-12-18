@@ -16,7 +16,7 @@ dataBase::dataBase(QObject *parent) : QObject(parent) {
 	if (!query.exec()) {
 		ERROR(query);
 	}
-	//create table for destination directories
+	//create table for destination directory
 	query.clear();
 	query.prepare("CREATE TABLE IF NOT EXISTS destinationDir (path ABSOLUTE PATH)");
 
@@ -30,7 +30,7 @@ dataBase::~dataBase() {}
 
 void
 dataBase::slotAddNewDirToDB(const QString &path) {
-	if (db.open()) {
+	if (db.open() && !path.isEmpty()) { //safeguard against empty paths that get added for some reason
 		QSqlQuery query(db);
 
 		if (!query.prepare("INSERT INTO watchedDirs VALUES(:path)")) {
@@ -75,6 +75,16 @@ dataBase::slotAddNewDestToDB(const QString &path) {
 	if (db.open()) {
 		QSqlQuery query(db);
 
+		//delete any destination that we might already have since we only want one
+		if (!query.prepare("DELETE FROM destinationDir")) {
+			ERROR(query);
+		}
+
+		if (!query.exec()) {
+			ERROR(query);
+		}
+
+		query.clear();
 		if (!query.prepare("INSERT INTO destinationDir VALUES(:path)")) {
 			ERROR(query);
 		}
@@ -84,27 +94,6 @@ dataBase::slotAddNewDestToDB(const QString &path) {
 			ERROR(query);
 		}
 		db.commit(); //commit changes to database
-		db.close();
-	}
-	else {
-		ERROR(db);
-	}
-}
-
-void
-dataBase::slotRemoveDestFromDB(const QString &path) {
-	if (db.open()) {
-		QSqlQuery query(db);
-
-		if (!query.prepare("DELETE FROM destinationDir WHERE path = :path")) {
-			ERROR(query);
-		}
-		query.bindValue(":path", path);
-
-		if (!query.exec()) {
-			ERROR(query);
-		}
-		db.commit();
 		db.close();
 	}
 	else {
@@ -124,7 +113,9 @@ dataBase::emitData() {
 
 		QStringList pathList;
 		while (query.next()) { //get each row which contains directories and add to list
-			pathList.append(query.value(0).toString());
+			if (!query.value(0).toString().isEmpty()){ //safeguard for empty values
+				pathList.append(query.value(0).toString());
+			}
 		}
 
 		query.clear();
@@ -139,7 +130,7 @@ dataBase::emitData() {
 		db.close();
 
 		emit dirsLoadedFromDB(pathList); // emit list of paths loaded from database
-		//emit destLoadedFromDB(dest);
+		emit destLoadedFromDB(dest);
 	}
 	else {
 		ERROR(db);

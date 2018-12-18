@@ -9,6 +9,8 @@
 #include "fileSystemWindowGUI.h"
 #include "confirmDirMessageGUI.h"
 #include "fileToCopyDetector.h"
+#include "destLocalGUI.h"
+#include "fileCopyHandler.h"
 
 class AutoBackUpGUI : public QMainWindow
 {
@@ -18,7 +20,7 @@ public:
 	AutoBackUpGUI(QWidget *parent = Q_NULLPTR);
 	~AutoBackUpGUI();
 
-	void setupExternalConnections(dataBase *db, fileToCopyDetector *detector);
+	void setupExternalConnections(dataBase *db, fileToCopyDetector *detector, fileCopyHandler *copyHandler);
 
 private:
 	Ui::AutoBackUpGUIClass ui;
@@ -32,10 +34,17 @@ private:
 	const int watchedH = 200; //Height of watchedLabel
 	const int watchedW = 200; //width of watchedLabel
 
-	fileSystemWindowGUI *fileSystemWindow;
-	confirmDirMessageGUI *confirmDirMessage;
+	fileSystemWindowGUI *fileSysWindowDest; //handles selection of destination directory
+	fileSystemWindowGUI *fileSysWindowWatched; //handles selection of watched directories
+	confirmDirMessageGUI *confirmMessageWatched; //confirmation message when choosing a watched directory
+	confirmDirMessageGUI *confirmMessageDest; //confirmation message when choosing a destination directory
+
+	destLocalGUI *localBackupDest;
+	buttonGUI *newButton;
+	buttonGUI *noneButton;
 
 	QFont *fontScroll = new QFont("Arial", 10); //font for items in scroll area
 	QFont *fontButton = new QFont("Arial", 13, QFont::Bold); //font for buttons
 	QFont *fontTitle = new QFont("Arial", 14, QFont::Bold); //font for titles
+	QFont *fontSubTitle = new QFont("Arial", 13); //font for subtitles
 };

@@ -38,30 +38,34 @@ fileToCopyDetector::addPathToWatch(const QString &path) {
 
 void
 fileToCopyDetector::slotDirChanged(const QString &path) {
+	if (isDestinationSet) {
+		QDir newDir(path);
+		QStringList files = newDir.entryList();
+		QMultiMap<QString, QString> temp = dirsAndFilesMap; //create copy of map containing current entries
+		bool fileRemoved = true;
 
-	QDir newDir(path);
-	QStringList files = newDir.entryList();
-	QMultiMap<QString, QString> temp = dirsAndFilesMap; //create copy of map containing current entries
-	bool fileRemoved = true;
+		//iterate over files list and emit path to file if it is not contained in the dirsAndFilesMap
+		//if they are in map, remove them from a temp copy to check if a file was removed
+		//if a file's path is emitted, that means it was the file just added to the directory
 
-	//iterate over files list and emit path to file if it is not contained in the dirsAndFilesMap
-	//if they are in map, remove them from a temp copy to check if a file was removed
-	//if a file's path is emitted, that means it was the file just added to the directory
-
-	for (QString &file : files) {
-		if (!dirsAndFilesMap.contains(path, file)) {
-			dirsAndFilesMap.insert(path, file);
-			emit newFileToTransfer(newDir.absoluteFilePath(file)); //create absolute path to file and emit
-			fileRemoved = false;
+		for (QString &file : files) {
+			if (!dirsAndFilesMap.contains(path, file)) {
+				dirsAndFilesMap.insert(path, file);
+				emit newFileToTransfer(newDir.absoluteFilePath(file)); //create absolute path to file and emit
+				fileRemoved = false;
+			}
+			else {
+				temp.remove(path, file); //file is already in path
+			}
 		}
-		else {
-			temp.remove(path, file); //file is already in path
+
+		if (fileRemoved) {
+			QStringList deletedFiles = temp.values(path); //files that were removed from the directory
+			removeFiles(deletedFiles, path);
 		}
 	}
-
-	if (fileRemoved) {
-		QStringList deletedFiles = temp.values(path); //files that were removed from the directory
-		removeFiles(deletedFiles, path);
+	else {
+		qDebug() << "No destination set";
 	}
 }
 
@@ -100,4 +104,14 @@ fileToCopyDetector::slotWatchNewDir(const QStringList &paths) {
 void
 fileToCopyDetector::slotStopWatchingDir(const QString &dirPath) {
 	removePath(dirPath);
+}
+
+void 
+fileToCopyDetector::slotDestinationSet(const QString &destPath) {
+	if (destPath.isEmpty()) {
+		isDestinationSet = false;
+	}
+	else {
+		isDestinationSet = true;
+	}
 }

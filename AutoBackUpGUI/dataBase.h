@@ -24,8 +24,7 @@ private:
 public slots:
 	void slotAddNewDirToDB(const QString &path); //handles adding new directory to database
 	void slotRemoveFromDB(const QString &path); //handles removing directory from database
-	void slotAddNewDestToDB(const QString &path); //adds destination to database
-	void slotRemoveDestFromDB(const QString &path); //removes saved destination from database
+	void slotAddNewDestToDB(const QString &path); //adds destination to database, replaces current dest with newest one
 
 signals:
 	void dirsLoadedFromDB(const QStringList &paths); //signal that is emitted from emitData
