@@ -17,9 +17,9 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	localBackupDest = new destLocalGUI(this, watchedX + 240, watchedY, watchedW, watchedH, *fontTitle, *fontScroll, *fontSubTitle);
 	confirmMessageDest = new confirmDirMessageGUI();
 	newButton = new buttonGUI(this, watchedX + 240, watchedY + 60, watchedW / 2, 30, "New", *fontButton);
-	noneButton = new buttonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 60, watchedW / 2, 30, "None", *fontButton);
+	noneButton = new noneButtonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 60, watchedW / 2, 30, "None", *fontButton);
 	
-	//TODO - wire up noneButton, get newButton to make changes to destination throughout program
+	//TODO - setup noneButton
 
 
 	//establish connections
@@ -32,6 +32,7 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	QObject::connect(fileSysWindowDest, SIGNAL(openConfirmMessage()), confirmMessageDest, SLOT(slotOpenConfirmMessage()));
 	QObject::connect(confirmMessageDest, SIGNAL(okSelected()), fileSysWindowDest, SLOT(slotGetConfirmMessageResult()));
 	QObject::connect(fileSysWindowDest, SIGNAL(newDirToWatch(const QString)), localBackupDest, SLOT(slotUpdateDest(const QString)));
+	QObject::connect(noneButton, SIGNAL(noneClicked(const QString)), localBackupDest, SLOT(slotUpdateDest(const QString)));
 }
 
 AutoBackUpGUI::~AutoBackUpGUI() {
@@ -58,4 +59,6 @@ AutoBackUpGUI::setupExternalConnections(dataBase *db, fileToCopyDetector *detect
 	QObject::connect(fileSysWindowDest, SIGNAL(newDirToWatch(const QString)), detector, SLOT(slotDestinationSet(const QString)));
 	QObject::connect(fileSysWindowDest, SIGNAL(newDirToWatch(const QString)), copyHandler, SLOT(slotNewDestDir(const QString)));
 	QObject::connect(db, SIGNAL(destLoadedFromDB(const QString)), localBackupDest, SLOT(slotUpdateDest(const QString)));
+	QObject::connect(noneButton, SIGNAL(noneClicked(const QString)), detector, SLOT(slotDestinationSet(const QString)));
+	QObject::connect(noneButton, SIGNAL(noneClicked(const QString)), db, SLOT(slotAddNewDestToDB(const QString)));
 }

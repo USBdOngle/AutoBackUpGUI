@@ -75,7 +75,7 @@ dataBase::slotAddNewDestToDB(const QString &path) {
 	if (db.open()) {
 		QSqlQuery query(db);
 
-		//delete any destination that we might already have since we only want one
+		//delete any destination that we might already have since we only want one or zero
 		if (!query.prepare("DELETE FROM destinationDir")) {
 			ERROR(query);
 		}
@@ -84,15 +84,18 @@ dataBase::slotAddNewDestToDB(const QString &path) {
 			ERROR(query);
 		}
 
-		query.clear();
-		if (!query.prepare("INSERT INTO destinationDir VALUES(:path)")) {
-			ERROR(query);
-		}
-		query.bindValue(":path", path);
+		if (!path.isEmpty()) { //don't want to insert an empty path
+			query.clear();
+			if (!query.prepare("INSERT INTO destinationDir VALUES(:path)")) {
+				ERROR(query);
+			}
+			query.bindValue(":path", path);
 
-		if (!query.exec()) {
-			ERROR(query);
+			if (!query.exec()) {
+				ERROR(query);
+			}
 		}
+
 		db.commit(); //commit changes to database
 		db.close();
 	}

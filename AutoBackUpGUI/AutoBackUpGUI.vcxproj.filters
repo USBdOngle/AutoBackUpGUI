@@ -63,6 +63,9 @@
     <ClCompile Include="destLocalGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="noneButtonGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoBackUpGUI.h">
@@ -95,6 +98,9 @@
     <QtMoc Include="destLocalGUI.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="noneButtonGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AutoBackUpGUI.ui">
@@ -125,6 +131,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="destLocalGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="noneButtonGUI.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

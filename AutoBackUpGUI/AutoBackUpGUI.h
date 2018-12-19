@@ -11,6 +11,7 @@
 #include "fileToCopyDetector.h"
 #include "destLocalGUI.h"
 #include "fileCopyHandler.h"
+#include "noneButtonGUI.h"
 
 class AutoBackUpGUI : public QMainWindow
 {
@@ -41,7 +42,7 @@ private:
 
 	destLocalGUI *localBackupDest;
 	buttonGUI *newButton;
-	buttonGUI *noneButton;
+	noneButtonGUI *noneButton;
 
 	QFont *fontScroll = new QFont("Arial", 10); //font for items in scroll area
 	QFont *fontButton = new QFont("Arial", 13, QFont::Bold); //font for buttons
