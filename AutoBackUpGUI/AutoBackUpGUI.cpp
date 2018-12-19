@@ -19,9 +19,6 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	newButton = new buttonGUI(this, watchedX + 240, watchedY + 60, watchedW / 2, 30, "New", *fontButton);
 	noneButton = new noneButtonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 60, watchedW / 2, 30, "None", *fontButton);
 	
-	//TODO - setup noneButton
-
-
 	//establish connections
 	QObject::connect(addButton, SIGNAL(clicked()), fileSysWindowWatched, SLOT(slotOpenWindow()));
 	QObject::connect(fileSysWindowWatched, SIGNAL(openConfirmMessage()), confirmMessageWatched, SLOT(slotOpenConfirmMessage()));
