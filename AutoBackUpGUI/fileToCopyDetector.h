@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QString>
 #include <QDir>
-#include <QMultiMap>
+#include <QHash>
 #include <QStringList>
 
 class fileToCopyDetector : public QFileSystemWatcher
@@ -19,10 +19,10 @@ public:
 	bool addPathToWatch(const QString &path); //add a path to directory to watch, used for testing
 
 private:
-	QMultiMap<QString, QString> dirsAndFilesMap; //contains an index of files already contained in destination directories
+	QHash<QString, QHash<QString, int>> dirsAndFilesHash; //hash table that contains directory path as key, and another hash table as the element that contains it the directories contents as keys and an int as a placeholder
 	bool isDestinationSet = false; //keeps track whether there is currently a set destination, if not nothing will happen
 
-	void removeFiles(QStringList &files, const QString &path); //handles the case when a file is removed from a directory being watched
+	//void removeFiles(QStringList &files, const QString &path); //handles the case when a file is removed from a directory being watched
 
 public slots:
 	void slotWatchNewDir(const QString &dirPath); //receives signal that a new directory needs to be watched
@@ -31,7 +31,7 @@ public slots:
 	void slotDestinationSet(const QString &destPath); //receives signal of a new destination and determines if it is valid so fileToCopyDetector can begin working
 
 private slots:
-	void slotDirChanged(const QString &path); //internal slot that recieves signal that a watched directory was modified
+	//void slotDirChanged(const QString &path); //internal slot that recieves signal that a watched directory was modified
 
 signals:
 	void newFileToTransfer(const QString &filePath); //emits path to newly inserted file in directory
