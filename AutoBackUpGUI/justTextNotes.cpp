@@ -59,3 +59,4 @@
 + For my first set of optimizations I am going to focus on fileToCopyDetector as the storage class for holding data could be optimized as well as some
   other local functions.
 */
+//goo
