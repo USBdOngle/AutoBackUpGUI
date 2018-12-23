@@ -66,6 +66,9 @@
     <ClCompile Include="noneButtonGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="justTextNotes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoBackUpGUI.h">

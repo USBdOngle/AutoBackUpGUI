@@ -32,7 +32,11 @@ watchedDirsListGUI::slotAddNewDir(const QString &dir) {
 void
 watchedDirsListGUI::slotRemoveCurrentDir() {
 	QListWidgetItem* dirItem = currentItem(); //get currently selected item from displayed list of watched dirs
-	QString dirString = dirItem->text();
+	//either list is empty or nothing is selected
+	if (dirItem != NULL) {
+		QListWidgetItem* dirItem = currentItem(); //get currently selected item from displayed list of watched dirs
+		QString dirString = dirItem->text();
+		emit currentDirRemoved(dirString); //emit the direcotry that was removed so rest of program can handle changes
+	}
 	delete dirItem; //this removes the widget from the QListWidget
-	emit currentDirRemoved(dirString); //emit the direcotry that was removed so rest of program can handle changes
 }

@@ -123,6 +123,7 @@
     <ClCompile Include="fileToCopyDetector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="noneButtonGUI.cpp" />
+    <ClCompile Include="justTextNotes.cpp" />
     <ClCompile Include="testClass.cpp" />
     <ClCompile Include="watchedDirsListGUI.cpp" />
   </ItemGroup>
