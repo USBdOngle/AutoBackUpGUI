@@ -31,7 +31,7 @@ public slots:
 	void slotDestinationSet(const QString &destPath); //receives signal of a new destination and determines if it is valid so fileToCopyDetector can begin working
 
 private slots:
-	//void slotDirChanged(const QString &path); //internal slot that recieves signal that a watched directory was modified
+	void slotDirChanged(const QString &path); //internal slot that recieves signal that a watched directory was modified
 
 signals:
 	void newFileToTransfer(const QString &filePath); //emits path to newly inserted file in directory

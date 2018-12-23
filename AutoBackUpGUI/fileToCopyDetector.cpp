@@ -27,7 +27,7 @@ fileToCopyDetector::addPathToWatch(const QString &path) {
 	dirsAndFilesHash.insert(path, pathFiles); //insert new key/hash entry for new path
 	
 	QStringList files = newDir.entryList(); //get a list of files in the new directory
-	for (QString file : files) {
+	for (QString &file : files) {
 		dirsAndFilesHash[path].insert(file, 0); //insert each file into hash table at key=path
 	}
 
@@ -36,13 +36,13 @@ fileToCopyDetector::addPathToWatch(const QString &path) {
 	return true;
 }
 
-/*
+
 void
 fileToCopyDetector::slotDirChanged(const QString &path) {
 	if (isDestinationSet) {
 		QDir newDir(path);
 		QStringList files = newDir.entryList();
-		//QMultiMap<QString, QHash<QString, int>> temp = dirsAndFilesHash; //create copy of map containing current entries
+		QHash<QString, int> temp = dirsAndFilesHash.value(path); //create copy of hash table contained at key=path
 		bool fileRemoved = true;
 
 		//iterate over files list and emit path to file if it is not contained in the dirsAndFilesMap
@@ -50,26 +50,26 @@ fileToCopyDetector::slotDirChanged(const QString &path) {
 		//if a file's path is emitted, that means it was the file just added to the directory
 
 		for (QString &file : files) {
-			if (!dirsAndFilesHash.contains(path, file)) {
-				dirsAndFilesHash.insert(path, file);
+			if (!dirsAndFilesHash[path].contains(file)) {
+				dirsAndFilesHash[path].insert(file, 0);
 				emit newFileToTransfer(newDir.absoluteFilePath(file)); //create absolute path to file and emit
 				fileRemoved = false;
 			}
 			else {
-				temp.remove(path, file); //file was already in directory, nothing to do
+				temp.remove(file); //file was already in directory, nothing to do
 			}
 		}
 
 		if (fileRemoved) {
-			QStringList deletedFiles = temp.values(path); //files that were removed from the directory
-			removeFiles(deletedFiles, path);
+			QStringList deletedFiles = temp.keys(); //files that were removed from the directory
+			//removeFiles(deletedFiles, path);
 		}
 	}
 	else {
 		qDebug() << "No destination set";
 	}
 }
-
+/*
 void
 fileToCopyDetector::removeFiles(QStringList &files, const QString &path) {
 	QString possibleDir;
