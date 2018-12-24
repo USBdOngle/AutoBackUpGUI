@@ -59,3 +59,36 @@
 + For my first set of optimizations I am going to focus on fileToCopyDetector as the storage class for holding data could be optimized as well as some
   other local functions.
 */
+
+//Dec 23, 2018
+/*
+-Changed the QMultiMap class that was used to store the directories being watched and files to determine which files were added to 
+ a directory to a QHash with key=directory and element=QHash where the keys were the files in each directory.
+-QMultiMap is based on red-black trees and provides logarithmic lookups for the directories and possible linear time lookups for the files contained in each directory.
+ My QHash implementation should provide closer to constant time lookups.
+-I will be repeating test 1 and test 3 from past entry including the manual transfer incase anything has happened on the system since the last test that could affect performance
+ outside of the programs control
+
+-TEST 1
+ + 4.23GB folder containing 1,303 files, 64 folders
+ + Source and destination on local 1TB 7200rpm HDD
+ + Running from visual studio in Release mode
+ + RESULTS:
+		Program:	Windows CtrlC/V:
+	T1	1m18s		1m18s
+	T2  1m17s		1m16s
+	T3  1m16s		1m14s
+
+   AVG  1m17s		1m16s -> 1.31% slower
+
+-TEST 3
++ same conditions as TEST 1
++ source 240gb Sata SSD, destination 1TB 7200RPM HDD
++ RESULTS:
+		Program:	Windows CtrlC/V:
+	T1  34s			26s
+	T2	28s			24s
+	T3  25s			24s
+
+   AVG 27.7s        24.7s -> 11.4% slower
+*/

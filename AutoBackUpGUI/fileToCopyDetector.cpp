@@ -45,8 +45,8 @@ fileToCopyDetector::slotDirChanged(const QString &path) {
 		QHash<QString, int> temp = dirsAndFilesHash.value(path); //create copy of hash table contained at key=path
 		bool fileRemoved = true;
 
-		//iterate over files list and emit path to file if it is not contained in the dirsAndFilesMap
-		//if they are in map, remove them from a temp copy to check if a file was removed
+		//iterate over files list and emit path to file if it is not contained in the dirsAndFilesHash
+		//if they are in, remove them from a temp copy to check if a file was removed
 		//if a file's path is emitted, that means it was the file just added to the directory
 
 		for (QString &file : files) {
@@ -62,34 +62,16 @@ fileToCopyDetector::slotDirChanged(const QString &path) {
 
 		if (fileRemoved) {
 			QStringList deletedFiles = temp.keys(); //files that were removed from the directory
-			//removeFiles(deletedFiles, path);
+			for (QString &file : deletedFiles) {
+				dirsAndFilesHash[path].remove(file);
+			}
 		}
 	}
 	else {
 		qDebug() << "No destination set";
 	}
 }
-/*
-void
-fileToCopyDetector::removeFiles(QStringList &files, const QString &path) {
-	QString possibleDir;
-	QStringList dirs = directories(); //list of directories being watched by inherited QFileSystemWatcher
 
-	for (QString &file : files) {
-		dirsAndFilesHash.remove(path, file);
-		possibleDir = path + '/' + file;
-		//handles case where file being removed is a sub-directory being watched
-		for (QString &dir : dirs) {
-			if (dir.contains(possibleDir)) { //compare all directories being watched to each file that was removed
-				dirsAndFilesHash.remove(dir);
-				removePath(dir);	//remove path from being watched by QFileSystemWatcher
-				emit dirRemoved(dir);
-				qDebug() << "No longer watching " << dir;
-			}
-		}
-	}
-}
-*/
 void
 fileToCopyDetector::slotWatchNewDir(const QString &dirPath) {
 	addPathToWatch(dirPath);
