@@ -79,16 +79,11 @@
 	T2  1m17s		1m16s
 	T3  1m16s		1m14s
 
-   AVG  1m17s		1m16s -> 1.31% slower
+ Somehow results of TEST 2 weren't saved but from what I remember nothing was really improved as the changes above only affect the runtime in fileToCopyDetector which when
+ copying a large directory only has to detect the folder once, then fileCopyHandler does a lot of work for each sub folder and file.
+ */
 
--TEST 3
-+ same conditions as TEST 1
-+ source 240gb Sata SSD, destination 1TB 7200RPM HDD
-+ RESULTS:
-		Program:	Windows CtrlC/V:
-	T1  34s			26s
-	T2	28s			24s
-	T3  25s			24s
-
-   AVG 27.7s        24.7s -> 11.4% slower
+//Dec 31. 2018
+/*
+-changed fileCopyHandler::extractName to get the name copying memory locations instead of iterating through filePath which should help save time.
 */
