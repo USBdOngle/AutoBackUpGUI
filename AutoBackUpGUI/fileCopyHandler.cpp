@@ -56,11 +56,11 @@ fileCopyHandler::copyFile(const QString &filePath, QString destination) {
 QString
 fileCopyHandler::extractName(const QString &filePath) {
 	int pos = filePath.lastIndexOf('/'); //filename is contained after this
-	QString name; //contains name of item in path
 
-	for (int i = pos; i < filePath.size(); i++) {
-		name.append(filePath[i]);
-	}
+	std::string path = filePath.toStdString();
+	std::string temp(&path[pos], &path[pos] + filePath.size() - pos); //create new string that contains end portion of file path "/filename"
+	
+	QString name = QString::fromStdString(temp);		 
 	return name;
 }
 
@@ -71,7 +71,7 @@ fileCopyHandler::updateDest(const QString &filePath) {
 	int start = end; //keeps track of portion of filePath that could be a possible directory
 
 	for (int i = start; i >= 1; i--) {
-		newDest = filePath.section('/', start, end); //portion of filPath to check if it has a corresponding sub directory in destination
+		newDest = filePath.section('/', start, end); //portion of filePath to check if it has a corresponding sub directory in destination
 		QString fullDest = destPath + '/' + newDest;
 		QDir testDest(fullDest);
 
