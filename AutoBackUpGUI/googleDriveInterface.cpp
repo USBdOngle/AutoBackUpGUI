@@ -20,15 +20,22 @@ googleDriveInterface::getAuthentication() {
 	const auto clientID = settingsObject["client_id"].toString();
 	const QUrl tokenUri(settingsObject["token_uri"].toString());
 	const auto clientSecret(settingsObject["client_secret"].toString());
+	const auto redirectUris = settingsObject["redirect_uris"].toArray();
+	const QUrl redirectUri(redirectUris[0].toString()); //get first URI
+	const auto port = static_cast<quint16>(redirectUri.port()); // port needed to for QOAuthHttpServerReplyHandler
 
 	google->setAuthorizationUrl(authUri);
 	google->setClientIdentifier(clientID);
 	google->setAccessTokenUrl(tokenUri);
 	google->setClientIdentifierSharedKey(clientSecret);
 	
-	auto replyHandler = new QOAuthReplyHandler(this);
+	auto replyHandler = new QOAuthHttpServerReplyHandler(port, this);
 	google->setReplyHandler(replyHandler);
-	google->grant();
+	google->grant(); //start authorization process
+
+
+	QObject::connect(google, &QOAuth2AuthorizationCodeFlow::granted, this, SLOT(test()));
+
 
 }
 
