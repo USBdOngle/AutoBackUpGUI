@@ -5,10 +5,14 @@
 #include "testClass.h"
 #include "fileCopyHandler.h"
 #include "dataBase.h"
+#include "googleDriveInterface.h"
 
 int main(int argc, char *argv[])
 {
+	
 	QApplication a(argc, argv);
+	
+	/*
 	QString path = "C:/Users/Chris/Desktop/testA";
 	QString path2 = "C:/Users/Chris/Desktop/testA/CMPT127-Lab Instructions";
 	QString path3 = "C:/Users/Chris/Desktop/testA/CMPT127-Lab Instructions/New folder";
@@ -46,6 +50,10 @@ int main(int argc, char *argv[])
 	w.show();
 
 	dbTest->emitData();
+	*/
+
+	googleDriveInterface test(&a);
+	test.getAuthentication();
 
 	return a.exec();
 }
