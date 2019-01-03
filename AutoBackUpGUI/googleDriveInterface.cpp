@@ -26,7 +26,7 @@ googleDriveInterface::getAuthentication() {
 	google->setAccessTokenUrl(tokenUri);
 	google->setClientIdentifierSharedKey(clientSecret);
 	
-	auto replyHandler = new QOAuthHttpServerReplyHandler(this);
+	auto replyHandler = new QOAuthReplyHandler(this);
 	google->setReplyHandler(replyHandler);
 	google->grant();
 
