@@ -72,9 +72,6 @@
     <ClCompile Include="googleDriveInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QOAuthReplyHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoBackUpGUI.h">
@@ -111,9 +108,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="googleDriveInterface.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="QOAuthReplyHandler.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

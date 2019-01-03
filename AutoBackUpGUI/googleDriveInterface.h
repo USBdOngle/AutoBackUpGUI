@@ -4,7 +4,6 @@
 #include <QDesktopServices>
 #include <QJsonDocument>
 #include <QDebug>
-#include "QOAuthReplyHandler.h"
 
 class googleDriveInterface : public QObject
 {
@@ -18,7 +17,16 @@ public:
 private:
 	//void getAuthentication(); //get OAuth2 authentication token from google
 	QJsonDocument getCredentials(const QString fileName); //returns QJsonDocument read in from fileName
+	void uploadFile(const QString &filePath);
+	
+	QOAuth2AuthorizationCodeFlow *google;
+	QString authToken;
+	QNetworkAccessManager *networkManager;
+	QNetworkReply *networkReply;
+
 
 private slots:
-	void test();
+	void slotSetAuthToken(); //slot to save the token when the granted signal is emitted after authorizing user
+	void testSlot(); //just for testing
+	void testSlot1();//
 };
