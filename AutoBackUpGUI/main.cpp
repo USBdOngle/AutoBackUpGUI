@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-	
+	dfsdfsdf
 	QApplication a(argc, argv);
 	
 	/*
