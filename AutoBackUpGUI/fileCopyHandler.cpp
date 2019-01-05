@@ -82,8 +82,3 @@ fileCopyHandler::updateDest(const QString &filePath) {
 	}
 	return destPath; //file is not from sub directory in a directory being watched so just return original destination
 }
-
-void
-fileCopyHandler::testemit() {
-	emit testDestination(destPath);
-}

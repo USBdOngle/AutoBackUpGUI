@@ -4,6 +4,7 @@
 #include <QDesktopServices>
 #include <QJsonDocument>
 #include <QDebug>
+#include <fileCopyHandler.h>
 
 class googleDriveInterface : public QObject
 {
@@ -21,8 +22,10 @@ private:
 	
 	QOAuth2AuthorizationCodeFlow *google;
 	QString authToken;
+	QString refreshToken;
 	QNetworkAccessManager *networkManager;
 	QNetworkReply *networkReply;
+	QHttpMultiPart *multiPart;
 
 
 private slots:
