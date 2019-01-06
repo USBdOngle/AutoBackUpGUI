@@ -2,11 +2,17 @@
 
 googleDriveInterface::googleDriveInterface(QObject *parent) : QObject(parent){
 	networkManager = new QNetworkAccessManager(this);
+
+	//FOR TESTING
+	//setup proxy application uses so we can monitor HTTP requests in external program
+	QNetworkProxy proxy;
+	proxy.setHostName("127.0.0.1");
+	proxy.setPort(8888);
+	QNetworkProxy::setApplicationProxy(proxy);
 }
 
 googleDriveInterface::~googleDriveInterface() {
 	delete google;
-	delete networkManager;
 	delete networkManager;
 }
 
@@ -64,98 +70,55 @@ googleDriveInterface::slotSetAuthToken() {
 
 void
 googleDriveInterface::uploadFile(const QString &filePath) {
-
-	/*QUrl uploadURL("https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable");
-	QNetworkRequest request(uploadURL);
-
-	QFile file(filePath);
-	if (!file.open(QIODevice::ReadOnly)) {
-		qDebug() << "unable to open: " << filePath << " for upload:" << file.errorString();
-		return;
-	}
-
-	//get size of file and save as qbytearray for request header
-	QByteArray fileSize;
-	fileSize.setNum(file.size());
-
-	//get MIME type of file
-	QMimeDatabase mimeDB; //contains a database of all MIME types
-	QMimeType mime = mimeDB.mimeTypeForFile(filePath);
-	QByteArray mimeType = mime.name().toUtf8();
-
-	QByteArray test = authToken.toUtf8();
-	//set headers
-	request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8()); //convert authToken to QByteArray when we set header;
-	request.setRawHeader("Content-Type", "application/json; charset=UTF-8");
-	request.setRawHeader("Content-Length", fileSize);
-	request.setRawHeader("X-Upload-Content-Type", mimeType);
-
-	//make json body for request
-	QJsonObject jsonBody;
-	QJsonValue JFile(fileCopyHandler::extractName(filePath)); //extract name of file from filePath
-	QJsonValue JMime(mime.name()); //mime type of file
-	QJsonValue JData(QString::fromUtf8(file.readAll()));
-	file.close();
-	jsonBody.insert("name", JFile);
-	jsonBody.insert("mimeType", JMime);
-	jsonBody.insert("description", "File uploaded by AutoBackUp.");
-	jsonBody.insert("media", JData);
-
-	networkReply = networkManager->post(request, QJsonDocument(jsonBody).toJson());
-	
-	*/
-	
 	//get MIME type of file
 	QMimeDatabase mimeDB; //contains a database of all MIME types
 	QMimeType mime = mimeDB.mimeTypeForFile(filePath);
 	QByteArray mimeType = mime.name().toUtf8();
 	
-	multiPart = new QHttpMultiPart(); //contains our multipart upload
+	multiPart = new QHttpMultiPart(QHttpMultiPart::RelatedType); //contains our multipart upload
 	
 	//part 1 - metadata
 	QHttpPart metaData; 
 	metaData.setRawHeader("Content-Type", "application/json; charset=UTF-8");
 	QJsonObject metaBody; //body containing metadata
-	QJsonValue JName(fileCopyHandler::extractName(filePath));
+	QString fileName = fileCopyHandler::extractName(filePath).remove(0,1); //extract name of file from filePath - remove first character as it is a '/'
+	QJsonValue JName(fileName);
 	QJsonValue JMime(mime.name());
 	metaBody.insert("name", JName);
 	metaBody.insert("mimeType", JMime);
-	metaBody.insert("Description", "Uploaded by AutoBackup.");
+	metaBody.insert("description", "Uploaded by AutoBackup.");
 	QByteArray metaBodyJson(QJsonDocument(metaBody).toJson());
 	metaData.setBody(metaBodyJson);
 
 	//part 2 - media data
 	QHttpPart mediaData; 
-	mediaData.setRawHeader("Content-Type", mimeType);
+	mediaData.setRawHeader("Content-Type", "application/octet-stream");
 	QFile *file = new QFile(filePath);
 	file->open(QIODevice::ReadOnly);
 	mediaData.setBodyDevice(file);
 	file->setParent(multiPart); //delete file when multiPart is deleted
-
+	//add parts to multipart
 	multiPart->append(metaData);
 	multiPart->append(mediaData);
-	QByteArray bodySize;
-	bodySize.setNum(file->size() + metaBodyJson.size()); //number of bytes in entire request body
-
+	
 	//setup rest of the request
 	QUrl uploadURL("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart");
 	QNetworkRequest request(uploadURL);
 	request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8()); //convert authToken to QByteArray when we set header;
 	request.setRawHeader("Content-Type", "multipart/related; boundary=" + multiPart->boundary());
-	request.setRawHeader("Content-Length", bodySize);
 
 	networkReply = networkManager->post(request, multiPart);
-
-	QObject::connect(networkReply, SIGNAL(metaDataChanged()), this, SLOT(testSlot1()));
+	
+	QObject::connect(networkReply, SIGNAL(finished()), this, SLOT(testSlot1()));
 }
 
 void
 googleDriveInterface::testSlot() {
-	uploadFile("C:/Users/Chris/Desktop/saveData.txt");
+	uploadFile("C:/Users/Chris/Desktop/wireshark.exe");
 }
 
 void 
 googleDriveInterface::testSlot1() {
 	QVariant statusCode = networkReply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-	
+	delete multiPart;
 }
