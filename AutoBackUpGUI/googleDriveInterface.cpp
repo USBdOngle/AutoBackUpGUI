@@ -9,6 +9,7 @@ googleDriveInterface::~googleDriveInterface() {
 
 void
 googleDriveInterface::getAuthentication() {
+	qDebug() << "Getting authentication for Goolge Drive";
 	//setup authorization flow
 	google = new QOAuth2AuthorizationCodeFlow(this);
 	google->setScope("https://www.googleapis.com/auth/drive"); //scope to give full access to google drive
@@ -56,7 +57,7 @@ googleDriveInterface::getCredentials(const QString fileName) {
 
 void
 googleDriveInterface::refreshAuthentication() {
-
+	qDebug() << "Refreshing access token";
 	QJsonDocument credentials = getCredentials("googleDriveCredentials.json"); //json file data is loaded into credentials
 	const auto object = credentials.object();
 	const auto settingsObject = object["installed"].toObject();
@@ -86,6 +87,7 @@ googleDriveInterface::refreshAuthentication() {
 
 void
 googleDriveInterface::slotSetAuthToken() {
+	qDebug() << "Received access and refresh Token";
 	authToken = google->token();
 	refreshToken = google->refreshToken();
 	delete google;
@@ -94,6 +96,7 @@ googleDriveInterface::slotSetAuthToken() {
 
 void
 googleDriveInterface::uploadFile(const QString &filePath) {
+	qDebug() << "trying to upload " << filePath << " to Google Drive";
 	currFileToUpload = filePath; //save filePath incase we need to retry current upload
 	
 	//get MIME type of file
@@ -154,7 +157,11 @@ googleDriveInterface::slotUploadResult() {
 	case 502: //bad gateway
 	case 503: //service unavailable
 	case 504: //gateway timeout
+		qDebug() << "5xx error: server side, retry upload";
+		uploadFile(currFileToUpload);
+		break;
 	case 403: //rate limit error		-- all cases retry upload
+		qDebug() << "403 error: rate limit hit, retry upload";
 		uploadFile(currFileToUpload);
 		break;
 	}
@@ -179,11 +186,13 @@ googleDriveInterface::slotAccessTokenRefreshed() {
 		QString resultString(result);
 		QString token = resultString.section('"', 3, 3); //this is portion of result containing access token
 		authToken = token; //update saved token
+		qDebug() << "Access token successfully refreshed";
 	}
 }
 
 void 
 googleDriveInterface::slotSetRefreshToken(const QString &token) {
+	qDebug() << "refresh token set from database";
 	refreshToken = token;
 	refreshAuthentication(); //get access token with refresh token for API
 }

@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
 	w.show();
 
 	dbTest->emitData();
-	googleDrive->getAuthentication();
 
 	return a.exec();
 }
