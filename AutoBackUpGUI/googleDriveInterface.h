@@ -39,6 +39,9 @@ private slots:
 	void slotUploadResult(); //handles the http request result when uploading a file
 	void slotAccessTokenRefreshed(); //receives signal when we make an access token refresh request
 
+	void testSlot(QNetworkReply::NetworkError);
+
 signals:
 	void newDriveApiRefreshToken(const QString &token);
+	void readyForNextUpload();
 };

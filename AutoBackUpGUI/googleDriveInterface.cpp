@@ -138,7 +138,8 @@ googleDriveInterface::uploadFile(const QString &filePath) {
 
 	networkReply = networkManager->post(request, multiPart);
 	
-	QObject::connect(networkReply, SIGNAL(finished()), this, SLOT(slotUploadResult()));
+	//QObject::connect(networkReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(testSlot(QNetworkReply::NetworkError)));
+	QObject::connect(networkReply, SIGNAL(finished()), this, SLOT(slotUploadResult()), Qt::DirectConnection);
 }
 
 void 
@@ -148,6 +149,7 @@ googleDriveInterface::slotUploadResult() {
 	switch (statusCode) {
 	case 200: //nothing to do, file succesfully uploaded
 		qDebug() << "file succuessfully uploaded to Google Drive";
+		emit readyForNextUpload(); //let program now we are ready for next file 
 		break;
 	case 401: //access token needs to be refreshed
 		qDebug() << "Error 401: Refreshing Access Token"; 
@@ -202,8 +204,14 @@ googleDriveInterface::slotUploadFileToDrive(const QString &filePath){
 	QFileInfo file(filePath);
 	if (file.isDir() || file.size() > 52428800) {
 		qDebug() << "unable to upload: " << filePath << "either >50mb or a directory";
+		emit readyForNextUpload(); //get next file to upload
 	}
 	else {
 		uploadFile(filePath);
 	}
+}
+
+void
+googleDriveInterface::testSlot(QNetworkReply::NetworkError error) {
+
 }
