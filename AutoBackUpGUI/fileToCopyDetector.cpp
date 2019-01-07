@@ -39,7 +39,7 @@ fileToCopyDetector::addPathToWatch(const QString &path) {
 
 void
 fileToCopyDetector::slotDirChanged(const QString &path) {
-	if (true) {
+	if (isDestinationSet) {
 		QDir newDir(path);
 		QStringList files = newDir.entryList();
 		QHash<QString, int> temp = dirsAndFilesHash.value(path); //create copy of hash table contained at key=path

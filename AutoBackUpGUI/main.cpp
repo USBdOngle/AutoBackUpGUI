@@ -6,7 +6,6 @@
 #include "fileCopyHandler.h"
 #include "dataBase.h"
 #include "googleDriveInterface.h"
-#include "googleFileUploadQueue.h";
 
 int main(int argc, char *argv[])
 {
@@ -28,7 +27,7 @@ int main(int argc, char *argv[])
 	QObject::connect(googleDrive, SIGNAL(newDriveApiRefreshToken(const QString)), dbTest, SLOT(slotAddRefreshTokenToDB(const QString)));
 	QObject::connect(dbTest, SIGNAL(refreshTokenLoadedFromDB(const QString)), googleDrive, SLOT(slotSetRefreshToken(const QString)));
 	QObject::connect(detectTest, SIGNAL(newFileToTransfer(const QString)), googleDrive, SLOT(slotUploadFileToDrive(const QString)));
-	
+
 	AutoBackUpGUI w;
 	w.setupExternalConnections(dbTest, detectTest, copyTest);
 	w.show();
