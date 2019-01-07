@@ -2,9 +2,15 @@
 
 googleDriveInterface::googleDriveInterface(QObject *parent) : QObject(parent){
 	networkManager = new QNetworkAccessManager(this);
+	fileQueue = new googleFileUploadQueue(this);
+
+	QObject::connect(this, SIGNAL(readyForNextUpload()), fileQueue, SLOT(slotShouldSendNextFile()));
+	QObject::connect(this, SIGNAL(addFileToQueue(const QString)), fileQueue, SLOT(slotAddFileToQueue(const QString)));
+	QObject::connect(fileQueue, SIGNAL(nextFileToUpload(const QString)), this, SLOT(slotUploadFile(const QString)));
 }
 
 googleDriveInterface::~googleDriveInterface() {
+	delete networkManager;
 }
 
 void
@@ -95,8 +101,9 @@ googleDriveInterface::slotSetAuthToken() {
 }
 
 void
-googleDriveInterface::uploadFile(const QString &filePath) {
+googleDriveInterface::slotUploadFile(const QString &filePath) {
 	qDebug() << "trying to upload " << filePath << " to Google Drive";
+	
 	currFileToUpload = filePath; //save filePath incase we need to retry current upload
 	
 	//get MIME type of file
@@ -138,6 +145,7 @@ googleDriveInterface::uploadFile(const QString &filePath) {
 
 	networkReply = networkManager->post(request, multiPart);
 	
+	QObject::connect(networkReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(testSlot(QNetworkReply::NetworkError)));
 	QObject::connect(networkReply, SIGNAL(finished()), this, SLOT(slotUploadResult()));
 }
 
@@ -148,6 +156,7 @@ googleDriveInterface::slotUploadResult() {
 	switch (statusCode) {
 	case 200: //nothing to do, file succesfully uploaded
 		qDebug() << "file succuessfully uploaded to Google Drive";
+		emit readyForNextUpload(); //let program now we are ready for next file 
 		break;
 	case 401: //access token needs to be refreshed
 		qDebug() << "Error 401: Refreshing Access Token"; 
@@ -158,11 +167,11 @@ googleDriveInterface::slotUploadResult() {
 	case 503: //service unavailable
 	case 504: //gateway timeout
 		qDebug() << "5xx error: server side, retry upload";
-		uploadFile(currFileToUpload);
+		//uploadFile(currFileToUpload);
 		break;
 	case 403: //rate limit error		-- all cases retry upload
 		qDebug() << "403 error: rate limit hit, retry upload";
-		uploadFile(currFileToUpload);
+		//uploadFile(currFileToUpload);
 		break;
 	}
 	delete networkReply;
@@ -202,8 +211,14 @@ googleDriveInterface::slotUploadFileToDrive(const QString &filePath){
 	QFileInfo file(filePath);
 	if (file.isDir() || file.size() > 52428800) {
 		qDebug() << "unable to upload: " << filePath << "either >50mb or a directory";
+		emit readyForNextUpload(); //get next file to upload
 	}
 	else {
-		uploadFile(filePath);
+		emit addFileToQueue(filePath);
 	}
+}
+
+void
+googleDriveInterface::testSlot(QNetworkReply::NetworkError error) {
+
 }
