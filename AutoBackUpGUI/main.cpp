@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	
 	fileToCopyDetector* detectTest = new fileToCopyDetector(&a);
 	dataBase* dbTest = new dataBase(&a);
-	fileCopyHandler* copyTest = new fileCopyHandler(dest, &a);
+	fileCopyHandler* copyTest = new fileCopyHandler(&a);
 
 	QObject::connect(detectTest, SIGNAL(newFileToTransfer(const QString)), copyTest, SLOT(slotFileToCopy(const QString)));
 	QObject::connect(copyTest, SIGNAL(newDirToWatch(const QString)), detectTest, SLOT(slotWatchNewDir(const QString)));
