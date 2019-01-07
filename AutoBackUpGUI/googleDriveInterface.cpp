@@ -88,7 +88,6 @@ void
 googleDriveInterface::slotSetAuthToken() {
 	authToken = google->token();
 	refreshToken = google->refreshToken();
-	delete networkReply;
 	delete google;
 	emit newDriveApiRefreshToken(refreshToken); //emit refresh token so it can be saved in DB
 }
@@ -145,8 +144,10 @@ googleDriveInterface::slotUploadResult() {
 	
 	switch (statusCode) {
 	case 200: //nothing to do, file succesfully uploaded
+		qDebug() << "file succuessfully uploaded to Google Drive";
 		break;
 	case 401: //access token needs to be refreshed
+		qDebug() << "Error 401: Refreshing Access Token"; 
 		refreshAuthentication();
 		break;
 	case 500: //internal server error
