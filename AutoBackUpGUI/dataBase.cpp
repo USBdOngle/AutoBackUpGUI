@@ -23,6 +23,14 @@ dataBase::dataBase(QObject *parent) : QObject(parent) {
 	if (!query.exec()) {
 		ERROR(query);
 	}
+
+	//create table for google drive refresh token
+	query.clear();
+	query.prepare("CREATE TABLE IF NOT EXISTS refreshToken (token REFRESH TOKEN)");
+
+	if (!query.exec()) {
+		ERROR(query);
+	}
 	db.close();
 }
 
@@ -121,6 +129,7 @@ dataBase::emitData() {
 			}
 		}
 
+		//get destination directory
 		query.clear();
 		query.prepare("SELECT path FROM destinationDir");
 
@@ -130,10 +139,58 @@ dataBase::emitData() {
 		query.next();
 		QString dest = query.value(0).toString();
 
+		//get refresh token if it exists
+		query.clear();
+		query.prepare("SELECT token FROM refreshToken");
+
+		if (!query.exec()) {
+			ERROR(query);
+		}
+		query.next();
+		QString token = query.value(0).toString();
+
 		db.close();
 
 		emit dirsLoadedFromDB(pathList); // emit list of paths loaded from database
 		emit destLoadedFromDB(dest);
+		//only want to emit if we actually have a refresh token saved
+		if (!token.isEmpty()) {
+			emit refreshTokenLoadedFromDB(token);
+		}
+	}
+	else {
+		ERROR(db);
+	}
+}
+
+void
+dataBase::slotAddRefreshTokenToDB(const QString &token) {
+	if (db.open()) {
+		QSqlQuery query(db);
+
+		//delete any refreshToken that we might already have since we only want one or zero
+		if (!query.prepare("DELETE FROM refreshToken")) {
+			ERROR(query);
+		}
+
+		if (!query.exec()) {
+			ERROR(query);
+		}
+
+		//if token is empty that means we just want to delete the current one
+		if (!token.isEmpty()) {
+			query.clear();
+			if (!query.prepare("INSERT INTO refreshToken VALUES(:token)")) {
+				ERROR(query);
+			}
+			query.bindValue(":token", token);
+
+			if (!query.exec()) {
+				ERROR(query);
+			}
+			db.commit(); //commit changes to database
+			db.close();
+		}
 	}
 	else {
 		ERROR(db);
