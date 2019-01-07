@@ -11,8 +11,10 @@ fileCopyHandler::~fileCopyHandler() {}
 
 void
 fileCopyHandler::slotFileToCopy(const QString &filePath) {
-	bool result = copyFile(filePath, updateDest(filePath));
-	qDebug() << "copying " << filePath << "returned " << result;
+	if (false) {
+		bool result = copyFile(filePath, updateDest(filePath));
+		qDebug() << "copying " << filePath << "returned " << result;
+	}
 }
 
 void
