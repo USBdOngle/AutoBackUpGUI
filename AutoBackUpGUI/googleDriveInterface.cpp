@@ -136,16 +136,20 @@ googleDriveInterface::uploadFile(const QString &filePath) {
 	request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8()); //convert authToken to QByteArray when we set header;
 	request.setRawHeader("Content-Type", "multipart/related; boundary=" + multiPart->boundary());
 
-	networkReply = networkManager->post(request, multiPart);
+	QNetworkAccessManager *uploadManager = new QNetworkAccessManager();
+	uploadManager->post(request, multiPart); //send request
 	
-	//QObject::connect(networkReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(testSlot(QNetworkReply::NetworkError)));
-	QObject::connect(networkReply, SIGNAL(finished()), this, SLOT(slotUploadResult()), Qt::DirectConnection);
+	QObject::connect(uploadManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(slotUploadResult(QNetworkReply *)));
 }
 
 void 
-googleDriveInterface::slotUploadResult() {
-	int statusCode = networkReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(); //we need to convert to int so we can use it with switch/case
-	
+googleDriveInterface::slotUploadResult(QNetworkReply *uploadReply) {
+	int statusCode = uploadReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(); //we need to convert to int so we can use it with switch/case
+	delete uploadReply;
+	delete multiPart;
+	QObject *uploadManager = sender();
+	delete uploadManager;
+
 	switch (statusCode) {
 	case 200: //nothing to do, file succesfully uploaded
 		qDebug() << "file succuessfully uploaded to Google Drive";
@@ -167,8 +171,6 @@ googleDriveInterface::slotUploadResult() {
 		uploadFile(currFileToUpload);
 		break;
 	}
-	delete networkReply;
-	delete multiPart;
 }
 
 void

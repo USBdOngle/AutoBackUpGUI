@@ -36,7 +36,7 @@ public slots:
 
 private slots:
 	void slotSetAuthToken(); //slot to save the token when the granted signal is emitted after authorizing use
-	void slotUploadResult(); //handles the http request result when uploading a file
+	void slotUploadResult(QNetworkReply *uploadReply); //handles the http request result when uploading a file
 	void slotAccessTokenRefreshed(); //receives signal when we make an access token refresh request
 
 	void testSlot(QNetworkReply::NetworkError);
