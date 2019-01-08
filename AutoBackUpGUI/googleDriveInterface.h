@@ -13,13 +13,12 @@ class googleDriveInterface : public QObject
 public:
 	googleDriveInterface(QObject *parent);
 	~googleDriveInterface();
-	void getAuthentication(); //here for testing
 
 private:
-	//void getAuthentication(); //get OAuth2 authentication token from google
 	QJsonDocument getCredentials(const QString fileName); //returns QJsonDocument read in from fileName
-	void uploadFile(const QString &filePath);
+	void uploadFile(const QString &filePath); //uploads file at filePath to google drive
 	void refreshAuthentication(); //refreshes access token and updates it locally
+	void getAuthentication(); //get authenticaion for google API
 	
 	QNetworkAccessManager *networkManager;
 	QNetworkReply *networkReply;
@@ -39,9 +38,7 @@ private slots:
 	void slotUploadResult(QNetworkReply *uploadReply); //handles the http request result when uploading a file
 	void slotAccessTokenRefreshed(); //receives signal when we make an access token refresh request
 
-	void testSlot(QNetworkReply::NetworkError);
-
 signals:
-	void newDriveApiRefreshToken(const QString &token);
-	void readyForNextUpload();
+	void newDriveApiRefreshToken(const QString &token); //emitted when we receive a new refresh token so it can be saved in DB
+	void readyForNextUpload(); //emitted when current upload is finished so we can get the next file to upload
 };
