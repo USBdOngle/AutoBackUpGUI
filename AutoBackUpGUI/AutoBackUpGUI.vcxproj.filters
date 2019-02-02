@@ -28,12 +28,12 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="gui">
+      <UniqueIdentifier>{e3be39d9-16a5-4e7e-a272-73f1e74e0802}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AutoBackUpGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fileCopyHandler.cpp">
@@ -48,24 +48,6 @@
     <ClCompile Include="testClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="buttonGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="watchedDirsListGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="fileSystemWindowGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="confirmDirMessageGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="destLocalGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="noneButtonGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="justTextNotes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,6 +56,30 @@
     </ClCompile>
     <ClCompile Include="googleFileUploadQueue.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoBackUpGUI.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonGUI.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="confirmDirMessageGUI.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="destGoogleGUI.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="destLocalGUI.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="noneButtonGUI.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="watchedDirsListGUI.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="fileSystemWindowGUI.cpp">
+      <Filter>gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +122,9 @@
     <QtMoc Include="googleFileUploadQueue.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="destGoogleGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AutoBackUpGUI.ui">
@@ -149,6 +158,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="noneButtonGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="destGoogleGUI.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

@@ -18,6 +18,10 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	confirmMessageDest = new confirmDirMessageGUI();
 	newButton = new buttonGUI(this, watchedX + 240, watchedY + 60, watchedW / 2, 30, "New", *fontButton);
 	noneButton = new noneButtonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 60, watchedW / 2, 30, "None", *fontButton);
+
+	googleBackupDest = new destGoogleGUI(this, watchedX + 240, watchedY, watchedW, watchedH, *fontSubTitle);
+	connectButton = new buttonGUI(this, watchedX + 240, watchedY + 130, watchedW / 2, 30, "Connect", *fontButton);
+	disconnectButton = new buttonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 130, watchedW / 2, 30, "Disconnect", *fontButton);
 	
 	//establish connections
 	QObject::connect(addButton, SIGNAL(clicked()), fileSysWindowWatched, SLOT(slotOpenWindow()));
@@ -30,6 +34,7 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	QObject::connect(confirmMessageDest, SIGNAL(okSelected()), fileSysWindowDest, SLOT(slotGetConfirmMessageResult()));
 	QObject::connect(fileSysWindowDest, SIGNAL(newDirToWatch(const QString)), localBackupDest, SLOT(slotUpdateDest(const QString)));
 	QObject::connect(noneButton, SIGNAL(noneClicked(const QString)), localBackupDest, SLOT(slotUpdateDest(const QString)));
+	QObject::connect(disconnectButton, SIGNAL(clicked()), googleBackupDest, SLOT(slotSetDisconnected()));
 }
 
 AutoBackUpGUI::~AutoBackUpGUI() {
@@ -43,6 +48,9 @@ AutoBackUpGUI::~AutoBackUpGUI() {
 	delete newButton;
 	delete noneButton;
 	delete fileSysWindowDest;
+	delete connectButton;
+	delete disconnectButton;
+	delete googleBackupDest;
 }
 
 void

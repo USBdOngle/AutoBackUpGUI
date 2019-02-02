@@ -12,6 +12,7 @@
 #include "destLocalGUI.h"
 #include "fileCopyHandler.h"
 #include "noneButtonGUI.h"
+#include "destGoogleGUI.h"
 
 class AutoBackUpGUI : public QMainWindow
 {
@@ -40,9 +41,13 @@ private:
 	confirmDirMessageGUI *confirmMessageWatched; //confirmation message when choosing a watched directory
 	confirmDirMessageGUI *confirmMessageDest; //confirmation message when choosing a destination directory
 
-	destLocalGUI *localBackupDest;
-	buttonGUI *newButton;
-	noneButtonGUI *noneButton;
+	destLocalGUI *localBackupDest; //handles window that contains our selction of local backup directories
+	buttonGUI *newButton; //button that allows us to choose a new backup destination
+	noneButtonGUI *noneButton; //button that removes our choice of backup destination
+
+	destGoogleGUI *googleBackupDest;
+	buttonGUI *connectButton; //button that initations google API authentication
+	buttonGUI *disconnectButton; //button that disconnects us from google API
 
 	QFont *fontScroll = new QFont("Arial", 10); //font for items in scroll area
 	QFont *fontButton = new QFont("Arial", 13, QFont::Bold); //font for buttons
