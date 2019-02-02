@@ -5,6 +5,11 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	this->setFixedSize(480, 300);
 	this->setWindowTitle("AutoBackUp");
 	
+	//widgets that relate to google drive portion of GUI
+	googleBackupDest = new destGoogleGUI(this, watchedX + 240, watchedY, watchedW, watchedH, *fontSubTitle);
+	connectButton = new buttonGUI(this, watchedX + 240, watchedY + 130, watchedW / 2, 30, "Connect", *fontButton);
+	disconnectButton = new buttonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 130, watchedW / 2, 30, "Disconnect", *fontButton);
+	
 	//widgets that relate to watched directories portion of GUI
 	watchedDirs = new watchedDirsListGUI(this, watchedX, watchedY, watchedW, watchedH, *fontScroll, *fontTitle);
 	addButton = new buttonGUI(this, watchedX, watchedY + 200, watchedW / 2, 30, "Add", *fontButton);
@@ -18,10 +23,6 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	confirmMessageDest = new confirmDirMessageGUI();
 	newButton = new buttonGUI(this, watchedX + 240, watchedY + 60, watchedW / 2, 30, "New", *fontButton);
 	noneButton = new noneButtonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 60, watchedW / 2, 30, "None", *fontButton);
-
-	googleBackupDest = new destGoogleGUI(this, watchedX + 240, watchedY, watchedW, watchedH, *fontSubTitle);
-	connectButton = new buttonGUI(this, watchedX + 240, watchedY + 130, watchedW / 2, 30, "Connect", *fontButton);
-	disconnectButton = new buttonGUI(this, watchedX + 240 + watchedH / 2, watchedY + 130, watchedW / 2, 30, "Disconnect", *fontButton);
 	
 	//establish connections
 	QObject::connect(addButton, SIGNAL(clicked()), fileSysWindowWatched, SLOT(slotOpenWindow()));
