@@ -28,9 +28,6 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="gui">
-      <UniqueIdentifier>{e3be39d9-16a5-4e7e-a272-73f1e74e0802}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,28 +55,28 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AutoBackUpGUI.cpp">
-      <Filter>gui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="buttonGUI.cpp">
-      <Filter>gui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="confirmDirMessageGUI.cpp">
-      <Filter>gui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="destGoogleGUI.cpp">
-      <Filter>gui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="destLocalGUI.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
-    <ClCompile Include="noneButtonGUI.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
-    <ClCompile Include="watchedDirsListGUI.cpp">
-      <Filter>gui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fileSystemWindowGUI.cpp">
-      <Filter>gui</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="noneButtonGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="watchedDirsListGUI.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
