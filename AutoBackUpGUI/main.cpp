@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	QObject::connect(copyTest, SIGNAL(newDirToWatch(const QString)), dbTest, SLOT(slotAddNewDirToDB(const QString)));
 	QObject::connect(dbTest, SIGNAL(dirsLoadedFromDB(const QStringList)), detectTest, SLOT(slotWatchNewDir(const QStringList)));
 	QObject::connect(detectTest, SIGNAL(dirRemoved(const QString)), dbTest, SLOT(slotRemoveFromDB(const QString)));
-	QObject::connect(copyTest, SIGNAL(testDestination(const QString)), dbTest, SLOT(slotAddNewDestToDB(const QString)));
+	//QObject::connect(copyTest, SIGNAL(testDestination(const QString)), dbTest, SLOT(slotAddNewDestToDB(const QString)));
 	QObject::connect(dbTest, SIGNAL(destLoadedFromDB(const QString)), copyTest, SLOT(slotNewDestDir(const QString)));
 	QObject::connect(dbTest, SIGNAL(destLoadedFromDB(const QString)), detectTest, SLOT(slotDestinationSet(const QString)));
 	QObject::connect(googleDrive, SIGNAL(newDriveApiRefreshToken(const QString)), dbTest, SLOT(slotAddRefreshTokenToDB(const QString)));
