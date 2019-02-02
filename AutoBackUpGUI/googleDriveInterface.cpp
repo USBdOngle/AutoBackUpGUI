@@ -9,7 +9,7 @@ googleDriveInterface::~googleDriveInterface() {
 
 void
 googleDriveInterface::getAuthentication() {
-	qDebug() << "Getting authentication for Google Drive";
+	qDebug() << "Getting authentication for Goolge Drive";
 	//setup authorization flow
 	google = new QOAuth2AuthorizationCodeFlow(this);
 	google->setScope("https://www.googleapis.com/auth/drive"); //scope to give full access to google drive
@@ -139,13 +139,12 @@ googleDriveInterface::uploadFile(const QString &filePath) {
 	QNetworkAccessManager *uploadManager = new QNetworkAccessManager();
 	uploadManager->post(request, multiPart); //send request
 	
-	QObject::connect(uploadManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(slotUploadResult(QNetworkReply *))); //send the result of our request to slotUploadResult
+	QObject::connect(uploadManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(slotUploadResult(QNetworkReply *)));
 }
 
 void 
 googleDriveInterface::slotUploadResult(QNetworkReply *uploadReply) {
 	int statusCode = uploadReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(); //we need to convert to int so we can use it with switch/case
-	//delete everything we used for the request
 	delete uploadReply;
 	delete multiPart;
 	QObject *uploadManager = sender();
@@ -154,12 +153,11 @@ googleDriveInterface::slotUploadResult(QNetworkReply *uploadReply) {
 	switch (statusCode) {
 	case 200: //nothing to do, file succesfully uploaded
 		qDebug() << "file succuessfully uploaded to Google Drive";
-		emit readyForNextUpload(); //let program know we are ready for next file 
+		emit readyForNextUpload(); //let program now we are ready for next file 
 		break;
 	case 401: //access token needs to be refreshed
 		qDebug() << "Error 401: Refreshing Access Token"; 
 		refreshAuthentication();
-		uploadFile(currFileToUpload);
 		break;
 	case 500: //internal server error
 	case 502: //bad gateway
@@ -178,7 +176,7 @@ googleDriveInterface::slotUploadResult(QNetworkReply *uploadReply) {
 void
 googleDriveInterface::slotAccessTokenRefreshed() {
 	QVariant statusCode = networkReply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-
+	
 	//refreshing access token failed, restart authentication process to get new refresh/access token
 	if (statusCode != "200") {
 		qDebug() << "unable to refresh access token";
@@ -187,11 +185,11 @@ googleDriveInterface::slotAccessTokenRefreshed() {
 	}
 	else {
 		QByteArray result = networkReply->readAll();
+		delete networkReply;
 		//extract access token from networkReply response
 		QString resultString(result);
 		QString token = resultString.section('"', 3, 3); //this is portion of result containing access token
 		authToken = token; //update saved token
-		delete networkReply;
 		qDebug() << "Access token successfully refreshed";
 	}
 }
@@ -213,4 +211,9 @@ googleDriveInterface::slotUploadFileToDrive(const QString &filePath){
 	else {
 		uploadFile(filePath);
 	}
+}
+
+void
+googleDriveInterface::testSlot(QNetworkReply::NetworkError error) {
+
 }
