@@ -6,7 +6,7 @@
 #include "fileCopyHandler.h"
 #include "dataBase.h"
 #include "googleDriveInterface.h"
-#include "googleFileUploadQueue.h";
+#include "googleFileUploadQueue.h"
 
 int main(int argc, char *argv[])
 {
