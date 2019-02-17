@@ -9,7 +9,7 @@ googleDriveInterface::~googleDriveInterface() {
 
 void
 googleDriveInterface::getAuthentication() {
-	qDebug() << "Getting authentication for Goolge Drive";
+	qDebug() << "Getting authentication for Googlee Drive";
 	//setup authorization flow
 	google = new QOAuth2AuthorizationCodeFlow(this);
 	google->setScope("https://www.googleapis.com/auth/drive"); //scope to give full access to google drive
