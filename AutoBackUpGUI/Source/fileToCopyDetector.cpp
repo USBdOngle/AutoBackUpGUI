@@ -37,6 +37,7 @@ fileToCopyDetector::addPathToWatch(const QString &path) {
 }
 
 
+//TODO slotDirChanged should only run when there is a watched directory+destination or we are connected to google drive
 void
 fileToCopyDetector::slotDirChanged(const QString &path) {
 	if (true) {

@@ -5,6 +5,10 @@ AutoBackUpGUI::AutoBackUpGUI(QWidget *parent) : QMainWindow(parent){
 	this->setFixedSize(480, 300);
 	this->setWindowTitle("AutoBackUp");
 	
+	//TODO connect google drive components of interface to rest of program.
+	//connect button should run through authorization process and notify fileToCopyDetector and fileCopyHandler
+	//disconnect button should delete refresh token from db and notify fileToCOpyDetector and fileCopyHandler
+
 	//widgets that relate to google drive portion of GUI
 	googleBackupDest = new destGoogleGUI(this, watchedX + 240, watchedY, watchedW, watchedH, *fontSubTitle);
 	connectButton = new buttonGUI(this, watchedX + 240, watchedY + 130, watchedW / 2, 30, "Connect", *fontButton);

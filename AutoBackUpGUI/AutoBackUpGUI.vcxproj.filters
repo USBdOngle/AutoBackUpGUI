@@ -28,100 +28,53 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="GUI Files">
+      <UniqueIdentifier>{5c532fe0-4a78-416d-b882-335790867187}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fileCopyHandler.cpp">
+    <ClCompile Include="Source\dataBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fileToCopyDetector.cpp">
+    <ClCompile Include="Source\fileCopyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dataBase.cpp">
+    <ClCompile Include="Source\fileToCopyDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testClass.cpp">
+    <ClCompile Include="Source\googleDriveInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="justTextNotes.cpp">
+    <ClCompile Include="Source\googleFileUploadQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="googleDriveInterface.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\AutoBackUpGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="googleFileUploadQueue.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\buttonGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutoBackUpGUI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\confirmDirMessageGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="buttonGUI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\destGoogleGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="confirmDirMessageGUI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\destLocalGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="destGoogleGUI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\fileSystemWindowGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="destLocalGUI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\noneButtonGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="fileSystemWindowGUI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GUI\watchedDirsListGUI.cpp">
+      <Filter>GUI Files</Filter>
     </ClCompile>
-    <ClCompile Include="noneButtonGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="watchedDirsListGUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="AutoBackUpGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="fileCopyHandler.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="fileToCopyDetector.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="dataBase.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="testClass.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="buttonGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="watchedDirsListGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="fileSystemWindowGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="confirmDirMessageGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="destLocalGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="noneButtonGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="googleDriveInterface.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="googleFileUploadQueue.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="destGoogleGUI.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AutoBackUpGUI.ui">
@@ -165,5 +118,46 @@
     <QtRcc Include="AutoBackUpGUI.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="AutoBackUpGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="buttonGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="confirmDirMessageGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="dataBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="destGoogleGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="destLocalGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fileCopyHandler.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fileSystemWindowGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fileToCopyDetector.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="googleDriveInterface.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="googleFileUploadQueue.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="noneButtonGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="watchedDirsListGUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

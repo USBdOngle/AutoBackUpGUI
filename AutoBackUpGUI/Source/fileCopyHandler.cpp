@@ -9,6 +9,8 @@ fileCopyHandler::fileCopyHandler(const QString &path, QObject *parent) : QFile(p
 
 fileCopyHandler::~fileCopyHandler() {}
 
+
+//TODO make it so it copies files locally only when there is a local destination set and google drive is not connected
 void
 fileCopyHandler::slotFileToCopy(const QString &filePath) {
 	if (false) {
